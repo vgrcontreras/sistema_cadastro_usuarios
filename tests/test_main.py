@@ -1,22 +1,14 @@
 from http import HTTPStatus
 
-from fastapi.testclient import TestClient
 
-from cadastro_usuarios.main import app
-
-
-def test_read_root_deve_retornar_hello_world():
-    client = TestClient(app)
-
+def test_read_root_deve_retornar_hello_world(client):
     response = client.get('/')
 
     assert response.status_code == HTTPStatus.OK
     assert response.json() == {'message': 'Hello World'}
 
 
-def test_create_user():
-    client = TestClient(app)
-
+def test_create_user(client):
     response = client.post(
         '/users',
         json={
